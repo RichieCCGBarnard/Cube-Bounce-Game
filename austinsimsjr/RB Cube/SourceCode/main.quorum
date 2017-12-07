@@ -1,0 +1,163 @@
+use Libraries.Game.Game
+use Libraries.Game.Graphics.Model
+use Libraries.Game.Graphics.AmbientLight
+use Libraries.Game.Graphics.DirectionalLight
+use Libraries.Game.Graphics.Color
+use Libraries.Game.InputMonitor
+use Libraries.Interface.Events.KeyboardEvent
+use Libraries.Compute.Vector3
+
+class Main is Game
+    Model cube
+    Model ground
+    Model ball
+    Model tube
+    Model wall
+    Model wall2
+    Model wall3
+    Color color
+    AmbientLight al
+    DirectionalLight dl
+    InputMonitor im 
+    KeyboardEvent key
+    Vector3 force
+    
+    
+    action Main
+        StartGame()
+    end
+
+ 
+    action CreateGame
+    EnablePhysics3D(true)
+wall:LoadBox(120,200,10,color:Yellow())
+    wall:SetPosition(0,0,10)
+Add(wall)
+    wall:EnablePhysics(true)
+wall:SetUnmovable()
+
+
+dl:SetColor(0.4,0.4,0.4,1)
+    dl:SetDirection(GetCamera3D():GetDirection())
+Add(dl)
+
+    al:SetColor(0.2,0.2,0.2,1)
+    SetAmbientLight(al)
+    
+cube:LoadBox(1,1,1,color:Red())
+    Add(cube)
+cube:EnablePhysics(true)
+    cube:SetResponsive()
+cube:SetRestitution(0)
+    cube:SetFriction(1)
+
+ground:LoadBox(120,3,200,color:Green())
+    ground:SetPosition(0,-5,0)
+Add(ground)
+    ground:EnablePhysics(true)
+ground:SetUnmovable()
+    ground:SetFriction(0.5)
+
+ball:LoadSphere(1,1,1,color:Red())
+    Add(ball)
+ball:EnablePhysics(true)
+    ball:SetResponsive()
+ball:SetRestitution(0)
+    ball:SetFriction(1)
+ball:SetPosition(0,5,0)   
+
+tube:LoadCylinder(1,1,1,color:Red())
+    Add(tube)
+tube:EnablePhysics(true)
+    tube:SetResponsive()
+tube:SetRestitution(0)
+    tube:SetFriction(1)
+tube:SetPosition(0,10,0)
+    
+SetGravity3D(0,-10,0)
+ end
+    action Update(number seconds)
+
+if im:IsKeyPressed(key:LEFT)
+    force:Set(-10,0,0)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:RIGHT)
+    force:Set(10,0,0)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,10,0)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,-10,0)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:LEFT)
+    force:Set(-10,0,0)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:RIGHT)
+    force:Set(10,0,0)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,10,0)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,-10,0)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,0,10)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,0,-10)
+cube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,0,10)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,0,-10)
+ball:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:LEFT)
+        force:Set(-10,0,0)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:RIGHT)
+    force:Set(10,0,0)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,10,0)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,-10,0)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:UP)
+    force:Set(0,0,10)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:DOWN)
+    force:Set(0,0,-10)
+tube:ApplyForceToCenter(force)
+    end
+if im:IsKeyPressed(key:R)
+    cube:SetPosition(0,1,0)
+end
+    if im:IsKeyPressed(key:R)
+ball:SetPosition(0,2,0)
+    end
+if im:IsKeyPressed(key:R)
+tube:SetPosition(0,3,0)
+    end
+    end
+end
